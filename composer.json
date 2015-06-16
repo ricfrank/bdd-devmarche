@@ -1,0 +1,29 @@
+{
+    "name": "riccardo/bdd-devmarche",
+    "description": "examples applications for devmarche techbar",
+    "authors": [
+        {
+            "name": "Riccardo Franconi",
+            "email": "riccardo.franconi@gmail.com"
+        }
+    ],
+    "require": {
+        "silex/silex" : "@stable",
+        "twig/twig" : "@stable",
+        "doctrine/dbal": "2.5.1"
+    },
+    "require-dev": {
+        "behat/behat" : "~3.0.6",
+        "phpunit/phpunit": "~4.7",
+        "behat/mink": "@stable",
+        "behat/mink-browserkit-driver": "@stable"
+    },
+    "autoload": {
+        "psr-0": {
+            "" : "src/"
+        },
+        "files": [
+          "vendor/phpunit/phpunit/src/Framework/Assert/Functions.php"
+      ]
+    }
+}
