@@ -1,0 +1,13 @@
+{
+    "name": "riccardo/bdd-devmarche",
+    "description": "examples applications for devmarche techbar",
+    "authors": [
+        {
+            "name": "Riccardo Franconi",
+            "email": "riccardo.franconi@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "behat/behat" : "~3.0.6"
+    }
+}
