@@ -9,6 +9,8 @@ class Conference
 
     private $tracks;
 
+    private $schedule = [];
+
     /**
      * @param $name
      * @param $tracks
@@ -23,5 +25,10 @@ class Conference
         $conference->tracks = $tracks;
 
         return $conference;
+    }
+
+    public function scheduleTalk(Talk $talk, Slot $slot, Track $track)
+    {
+        $this->schedule[$track->number()][$slot->schedule()] = $talk;
     }
 }
