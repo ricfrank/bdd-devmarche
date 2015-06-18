@@ -1,0 +1,10 @@
+default:
+  suites:
+    attendee:
+      paths: [ %paths.base%/features]
+      contexts:
+        - AttendeeContext
+    web_attendee:
+      paths: [ %paths.base%/features]
+      contexts:
+        - WebAttendeeContext
