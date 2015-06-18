@@ -57,17 +57,19 @@ class AttendeeContext implements Context, SnippetAcceptingContext
      */
     public function iChooseTheTalkForMyPersonalScheduleOfThisConference($talk)
     {
-        $talk = Talk::titled($talk);
+        $talk = $this->conference->findTitled($talk);
         $this->mySchedule = PersonalSchedule::ofConference($this->conference);
         $this->mySchedule->chooseTalk($talk);
     }
 
     /**
-     * @Then the chosen talk for :arg1 slot of my schedule should be the :arg2
+     * @Then the chosen talk for :slot slot of my schedule should be the :talk
      */
-    public function theChosenTalkForSlotOfMyScheduleShouldBeThe($arg1, $arg2)
+    public function theChosenTalkForSlotOfMyScheduleShouldBeThe($slot, $talk)
     {
-        throw new PendingException();
+        $talk = Talk::titled($talk);
+        $slot = Slot::fromSchedule($slot);
+        assertTrue($this->mySchedule->isTalkChoosenForSlot($talk, $slot));
     }
 
     /**

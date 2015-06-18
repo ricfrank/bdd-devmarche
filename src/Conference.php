@@ -29,6 +29,12 @@ class Conference
 
     public function scheduleTalk(Talk $talk, Slot $slot, Track $track)
     {
-        $this->schedule[$track->number()][$slot->schedule()] = $talk;
+        $talk->schedule($slot);
+        $this->schedule[$talk->title()] = $talk;
+    }
+
+    public function findTitled($talkTitle)
+    {
+        return $this->schedule[$talkTitle];
     }
 }

@@ -33,6 +33,11 @@ class PersonalSchedule
      */
     public function chooseTalk(Talk $talk)
     {
-        $this->talks[] = $talk;
+        $this->talks[$talk->scheduledAt()] = $talk;
+    }
+
+    public function isTalkChoosenForSlot(Talk $talk, Slot $slot)
+    {
+        return $this->talks[$slot->schedule()]->title() == $talk->title();
     }
 }
