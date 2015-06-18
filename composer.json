@@ -8,11 +8,15 @@
         }
     ],
     "require-dev": {
-        "behat/behat" : "~3.0.6"
+        "behat/behat" : "~3.0.6",
+        "phpunit/phpunit": "~4.7"
     },
     "autoload": {
         "psr-0": {
             "" : "src/"
-        }
+        },
+        "files": [
+          "vendor/phpunit/phpunit/src/Framework/Assert/Functions.php"
+      ]
     }
 }
