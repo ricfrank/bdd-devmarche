@@ -25,10 +25,15 @@ class WebAttendeeContext implements Context, SnippetAcceptingContext
     }
 
     /**
-     * @Given the :arg1 talk is scheduled for :arg2 slot on the conference track :arg3
+     * @Given the :talk talk is scheduled for :slot slot on the conference track :track
      */
-    public function theTalkIsScheduledForSlotOnTheConferenceTrack($arg1, $arg2, $arg3)
+    public function theTalkIsScheduledForSlotOnTheConferenceTrack($talk, $slot, $track)
     {
+        $talk = Talk::titled($talk);
+        $slot = Slot::fromSchedule($slot);
+        $track = Track::numbered($track);
+
+        $this->conference->scheduleTalk($talk, $slot, $track);
     }
 
     /**
