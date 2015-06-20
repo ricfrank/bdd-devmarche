@@ -12,11 +12,16 @@ use Behat\Gherkin\Node\TableNode;
 class WebAttendeeContext implements Context, SnippetAcceptingContext
 {
     /**
-     * @Given a conference named :arg1 with :arg2 track
+     * @var Conference
      */
-    public function aConferenceNamedWithTrack($arg1, $arg2)
-    {
+    private $conference;
 
+    /**
+     * @Given a conference named :name with :count track
+     */
+    public function aConferenceNamedWithTrack($name, $count)
+    {
+        $this->conference = Conference::namedWithTracks($name, $count);
     }
 
     /**
