@@ -9,7 +9,9 @@
     ],
     "require": {
         "silex/silex" : "@stable",
-        "twig/twig" : "@stable"
+        "twig/twig" : "@stable",
+        "doctrine/orm": "2.4.*",
+        "symfony/yaml": "2.*"
     },
     "require-dev": {
         "behat/behat" : "~3.0.6",
