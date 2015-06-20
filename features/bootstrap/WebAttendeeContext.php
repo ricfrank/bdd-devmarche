@@ -59,10 +59,21 @@ class WebAttendeeContext implements Context, SnippetAcceptingContext
     }
 
     /**
-     * @When I choose the :arg1 talk for my personal schedule of this conference
+     * @When I choose the :talk talk for my personal schedule of this conference
      */
-    public function iChooseTheTalkForMyPersonalScheduleOfThisConference($arg1)
+    public function iChooseTheTalkForMyPersonalScheduleOfThisConference($talk)
     {
+        $this->mink
+            ->getSession()
+            ->visit('/conferences/' . urlencode($this->conference->name()));
+
+        assertEquals(200, $this->mink->getSession()->getStatusCode());
+
+        $this->mink
+            ->getSession()
+            ->getPage()
+            ->find('css', '.talk:contains(' . $talk . ')')
+            ->clickLink('Add to my schedule');
     }
 
     /**
