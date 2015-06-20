@@ -5,11 +5,14 @@
  */
 class Conference
 {
+    private $id;
+
     private $name;
 
     private $tracks;
 
     private $schedule = [];
+
 
     /**
      * @param $name

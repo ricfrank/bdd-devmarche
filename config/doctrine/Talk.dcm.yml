@@ -1,0 +1,15 @@
+Talk:
+    type: entity
+    table:  talk
+    id:
+        id:
+          type: integer
+          generator:
+            strategy: AUTO
+    fields:
+        title:
+          type: string
+          length: 50
+        scheduledAt:
+          type: string
+          length: 50

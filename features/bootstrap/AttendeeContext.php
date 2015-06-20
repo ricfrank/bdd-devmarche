@@ -22,7 +22,7 @@ class AttendeeContext implements Context, SnippetAcceptingContext
     private $mySchedule;
 
     /**
-     * @Given a conference named :name with :count track
+     * @Given a conference named :name with :count track was planned
      */
     public function aConferenceNamedWithTrack($name, $count)
     {
