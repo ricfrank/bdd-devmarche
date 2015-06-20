@@ -1,16 +1,38 @@
 <?php
 
-use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
-use Behat\Gherkin\Node\PyStringNode;
-use Behat\Gherkin\Node\TableNode;
+use Behat\Mink\Driver\BrowserKitDriver;
+use Behat\Mink\Mink;
+use Behat\Mink\Session;
+use Symfony\Component\HttpKernel\Client;
 
 /**
  * Defines application features from the specific context.
  */
 class WebAttendeeContext implements Context, SnippetAcceptingContext
 {
+    /**
+     * @var Mink
+     */
+    private $mink;
+
+    /**
+     * @beforeScenario
+     */
+    public function initMink()
+    {
+        $app = new Application();
+        $app['debug'] = true;
+        unset($app['exception_handler']);
+
+        $this->mink = new Mink(array(
+            'silex' => new Session(new BrowserKitDriver(new Client($app))),
+        ));
+
+        $this->mink->setDefaultSessionName('silex');
+    }
+
     /**
      * @var Conference
      */
