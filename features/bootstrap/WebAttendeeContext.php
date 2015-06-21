@@ -43,7 +43,9 @@ class WebAttendeeContext implements Context, SnippetAcceptingContext
         $this->mink->setDefaultSessionName('silex');
 
         $app['db']->executeQuery('TRUNCATE conference');
-        $this->conferencePlanner = new DoctrineConferencePlanner($app['em']);
+        $app['db']->executeQuery('TRUNCATE talk');
+        $app['db']->executeQuery('TRUNCATE conference_talks');
+        $this->conferencePlanner = new ConferencePlanner($app['db']);
     }
 
     /**
