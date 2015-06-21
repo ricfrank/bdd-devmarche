@@ -1,8 +1,22 @@
 <?php
 
-interface ConferencePlanner
+class ConferencePlanner
 {
-    public function planConference(Conference $conference);
+    /**
+     * @var \Doctrine\DBAL\Connection
+     */
+    private $dbal;
 
-    public function scheduleTalkForConference(Talk $talk, Slot $slot, Track $track, Conference $conference);
-}
+    public function __construct(Doctrine\DBAL\Connection $dbal)
+    {
+        $this->dbal = $dbal;
+    }
+
+    public function planConference(Conference $conference)
+    {
+        $conferenceName = $conference->name();
+        $conferenceTracks = $conference->tracks();
+
+        $this->dbal
+            ->executeQuery("INSERT INTO conference (name, tracks) VALUES ('$conferenceName', '$conferenceTracks')");
+    }
