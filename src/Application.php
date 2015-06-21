@@ -49,11 +49,5 @@ class Application extends Silex
                 'dbname'   => 'bdd',
             ),
         ));
-
-        $app['em'] = $app->share(function($app){
-            $config = Setup::createYAMLMetadataConfiguration(array(__DIR__."/../config/doctrine"), true);
-            return EntityManager::create($app['db'], $config);
-        });
-
     }
 }

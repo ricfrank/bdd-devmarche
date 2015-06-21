@@ -5,8 +5,6 @@
  */
 class Conference
 {
-    private $id;
-
     private $name;
 
     private $tracks;
@@ -44,5 +42,10 @@ class Conference
     public function name()
     {
         return $this->name;
+    }
+
+    public function tracks()
+    {
+        return $this->tracks;
     }
 }
