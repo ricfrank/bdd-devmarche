@@ -43,6 +43,8 @@ class WebAttendeeContext implements Context, SnippetAcceptingContext
         $this->mink->setDefaultSessionName('silex');
 
         $app['db']->executeQuery('TRUNCATE conference');
+        $app['db']->executeQuery('TRUNCATE talk');
+        $app['db']->executeQuery('TRUNCATE conference_talks');
         $this->conferencePlanner = new ConferencePlanner($app['db']);
     }
 
@@ -64,7 +66,7 @@ class WebAttendeeContext implements Context, SnippetAcceptingContext
         $slot = Slot::fromSchedule($slot);
         $track = Track::numbered($track);
 
-        $this->conference->scheduleTalk($talk, $slot, $track);
+        $this->conferencePlanner->scheduleTalkForConference($talk, $slot, $track, $this->conference);
     }
 
     /**
