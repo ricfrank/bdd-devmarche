@@ -83,8 +83,7 @@ class WebAttendeeContext implements Context, SnippetAcceptingContext
         $this->mink
             ->getSession()
             ->getPage()
-            ->find('css', '.talk:contains(' . $talk . ')')
-            ->clickLink('Add to my schedule');
+            ->pressButton('Add to my schedule');
     }
 
     /**

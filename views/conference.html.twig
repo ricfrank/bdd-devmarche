@@ -1,3 +1,13 @@
+<html>
+<head><title>{{ name }} conference</title></head>
+</html>
+<h2>Schedule</h2>
 <ul>
-    <li class="talk">Specification - <a href="">Add to my schedule</a></li>
+    <li>Specification - 10:30-11:30
+        <form action="/my-schedule" method="post">
+            <input type="hidden" name="conference" value="Agile Conference"/>
+            <input type="hidden" name="talk" value="Specification"/>
+            <button type="submit">Add to my schedule</button>
+        </form>
+    </li>
 </ul>
