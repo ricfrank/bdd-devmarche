@@ -2,3 +2,8 @@
 <head><title>My Schedule</title></head>
 </html>
 <h2>My Schedule</h2>
+<ul class="my-schedule">
+    {% for slot, talk in myTalks %}
+        <li class="talk">{{ slot }} - {{ talk.title }}</li>
+    {% endfor %}
+</ul>

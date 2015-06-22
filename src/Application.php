@@ -49,7 +49,10 @@ class Application extends Silex
                 $mySchedule = PersonalSchedule::ofConference($conference);
                 $mySchedule->chooseTalk($conference->findTitled($talkTitle));
 
-                return $app['twig']->render('my-schedule.html.twig');
+                return $app['twig']->render(
+                    'my-schedule.html.twig',
+                    ['myTalks' => $mySchedule->talks()]
+                );
             }
         );
     }

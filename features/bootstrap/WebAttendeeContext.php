@@ -89,7 +89,14 @@ class WebAttendeeContext implements Context, SnippetAcceptingContext
     /**
      * @Then the chosen talk for :arg1 slot of my schedule should be the :arg2
      */
-    public function theChosenTalkForSlotOfMyScheduleShouldBeThe($arg1, $arg2)
+    public function theChosenTalkForSlotOfMyScheduleShouldBeThe($slot, $talk)
     {
+        $talkElement = $this->mink
+            ->getSession()
+            ->getPage()
+            ->find('css', '.my-schedule .talk:contains("' . $talk . '")');
+
+        assertContains($talk, $talkElement->getText());
+        assertContains($slot, $talkElement->getText());
     }
 }
