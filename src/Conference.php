@@ -47,4 +47,10 @@ class Conference
     {
         return $this->tracks;
     }
+
+    public function schedule()
+    {
+        return $this->schedule;
+    }
 }
+

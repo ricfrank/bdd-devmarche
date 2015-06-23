@@ -1,3 +1,5 @@
 <ul>
-    <li class="talk">Specification - <a href="">Add to my schedule</a></li>
+    {% for talk in conference.schedule %}
+        <li class="talk">{{ talk.title }} - <a href="">Add to my schedule</a></li>
+    {% endfor %}
 </ul>

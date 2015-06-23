@@ -26,10 +26,14 @@ class Application extends Silex
     {
         $app->get(
             '/conferences/{name}', function ($name) use ($app) {
+
+                $conferencePlanner = new ConferencePlanner($app['db']);
+                $conference = $conferencePlanner->findNamed(urldecode($name));
+
                 return $app['twig']->render(
                     'conference.html.twig',
                     array(
-                        'name' => $name,
+                        'conference' => $conference
                     )
                 );
             }

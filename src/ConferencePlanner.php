@@ -40,4 +40,33 @@ class ConferencePlanner
             );
     }
 
+
+    /**
+     * @param $conferenceName
+     *
+     * @return Conference
+     */
+    public function findNamed($conferenceName)
+    {
+        $conferenceRow = $this->dbal
+            ->fetchAssoc('SELECT * FROM conference WHERE name = ?', [$conferenceName]);
+
+        $conferenceTalks = $this->dbal
+            ->fetchAll(
+                'SELECT * FROM conference_talks JOIN talk ON talk.id = id_talk WHERE id_conference = ?',
+                [$conferenceRow['id']]
+            );
+
+        $conference = Conference::namedWithTracks($conferenceName, $conferenceRow['tracks']);
+
+        foreach ($conferenceTalks as $conferenceTalk) {
+            $talk = Talk::titled($conferenceTalk['title']);
+            $slot = Slot::fromSchedule($conferenceTalk['scheduledAt']);
+            $track = Track::numbered($conferenceTalk['track']);
+            $conference->scheduleTalk($talk, $slot, $track);
+        }
+
+        return $conference;
+    }
+
 }
