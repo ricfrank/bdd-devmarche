@@ -1,5 +1,12 @@
 <ul>
     {% for talk in conference.schedule %}
-        <li class="talk">{{ talk.title }} - <a href="">Add to my schedule</a></li>
+        <li class="talk">{{ talk.title }} -
+            <a href="">Add to my schedule</a>
+            <form action="/my-schedule" method="post">
+                <input type="hidden" name="conference" value="{{ conference.name }}"/>
+                <input type="hidden" name="talk" value="{{ talk.title }}"/>
+                <button type="submit">Add to my schedule</button>
+            </form>
+        </li>
     {% endfor %}
 </ul>

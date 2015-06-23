@@ -40,4 +40,9 @@ class PersonalSchedule
     {
         return $this->talks[$slot->schedule()]->title() == $talk->title();
     }
+
+    public function talks()
+    {
+        return $this->talks;
+    }
 }

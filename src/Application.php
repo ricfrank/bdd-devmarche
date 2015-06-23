@@ -3,6 +3,7 @@
 use Silex\Application as Silex;
 use Silex\Provider\DoctrineServiceProvider;
 use Silex\Provider\TwigServiceProvider;
+use Symfony\Component\HttpFoundation\Request;
 
 class Application extends Silex
 {
@@ -38,6 +39,22 @@ class Application extends Silex
                 );
             }
         );
+
+        $app->post(
+            '/my-schedule', function (Request $request) use ($app) {
+            $conferenceName = $request->get('conference');
+            $talkTitle = $request->get('talk');
+
+            $conferencePlanner = new ConferencePlanner($app['db']);
+            $conference = $conferencePlanner->findNamed($conferenceName);
+
+            $mySchedule = PersonalSchedule::ofConference($conference);
+            $mySchedule->chooseTalk($conference->findTitled($talkTitle));
+
+            return $app['twig']->render('my-schedule.html.twig', array('mySchedule' => $mySchedule));
+        }
+        );
+
 
     }
 

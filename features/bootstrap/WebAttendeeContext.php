@@ -84,13 +84,20 @@ class WebAttendeeContext implements Context, SnippetAcceptingContext
             ->getSession()
             ->getPage()
             ->find('css', '.talk:contains(' . $talk . ')')
-            ->clickLink('Add to my schedule');
+            ->pressButton('Add to my schedule');
     }
 
     /**
-     * @Then the chosen talk for :arg1 slot of my schedule should be the :arg2
+     * @Then the chosen talk for :slot slot of my schedule should be the :talk
      */
-    public function theChosenTalkForSlotOfMyScheduleShouldBeThe($arg1, $arg2)
+    public function theChosenTalkForSlotOfMyScheduleShouldBeThe($slot, $talk)
     {
+        $selectedTalk = $this->mink
+            ->getSession()
+            ->getPage()
+            ->find('css', '.talk');
+
+        assertContains($slot, $selectedTalk->getText());
+        assertContains($talk, $selectedTalk->getText());
     }
 }

@@ -1,0 +1,9 @@
+<html>
+<head><title>My Schedule</title></head>
+</html>
+<h2>My Schedule</h2>
+<ul>
+    {%  for talk in mySchedule.talks %}
+    <li class="talk">Ricordati di partecipare a "{{ talk.title }}" alle "{{ talk.scheduledAt }}"</li>
+    {% endfor %}
+</ul>
