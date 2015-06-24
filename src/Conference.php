@@ -37,4 +37,9 @@ class Conference
     {
         return $this->schedule[$talkTitle];
     }
+
+    public function name()
+    {
+        return $this->name;
+    }
 }
