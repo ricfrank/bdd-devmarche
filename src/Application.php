@@ -1,6 +1,7 @@
 <?php
 
 use Silex\Application as Silex;
+use Silex\Provider\DoctrineServiceProvider;
 use Silex\Provider\TwigServiceProvider;
 
 class Application extends Silex
@@ -12,6 +13,8 @@ class Application extends Silex
         $this->register(new TwigServiceProvider(), array(
             'twig.path' => __DIR__.'/../views',
         ));
+
+        $this->registerDoctrine($this);
 
         $this->defineControllers($this);
     }
@@ -32,5 +35,20 @@ class Application extends Silex
             }
         );
 
+    }
+
+    private function registerDoctrine(Application $app)
+    {
+        $app->register(
+            new DoctrineServiceProvider(),
+            array(
+                'db.options' => array(
+                    'driver' => 'pdo_mysql',
+                    'user' => 'root',
+                    'password' => '',
+                    'dbname' => 'bdd',
+                ),
+            )
+        );
     }
 }

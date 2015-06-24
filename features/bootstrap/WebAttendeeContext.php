@@ -18,9 +18,19 @@ class WebAttendeeContext implements Context, SnippetAcceptingContext
     private $mink;
 
     /**
+     * @var ConferencePlanner
+     */
+    private $conferencePlanner;
+
+    /**
+     * @var Conference
+     */
+    private $conference;
+
+    /**
      * @beforeScenario
      */
-    public function initMink()
+    public function setup()
     {
         $app = new Application();
         $app['debug'] = true;
@@ -31,19 +41,18 @@ class WebAttendeeContext implements Context, SnippetAcceptingContext
         ));
 
         $this->mink->setDefaultSessionName('silex');
+
+        $app['db']->executeQuery('TRUNCATE conference');
+        $this->conferencePlanner = new ConferencePlanner($app['db']);
     }
 
     /**
-     * @var Conference
-     */
-    private $conference;
-
-    /**
-     * @Given a conference named :name with :count track
+     * @Given a conference named :name with :count track was planned
      */
     public function aConferenceNamedWithTrack($name, $count)
     {
         $this->conference = Conference::namedWithTracks($name, $count);
+        $this->conferencePlanner->planConference($this->conference);
     }
 
     /**

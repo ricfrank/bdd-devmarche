@@ -42,4 +42,9 @@ class Conference
     {
         return $this->name;
     }
+
+    public function tracks()
+    {
+        return $this->tracks;
+    }
 }
