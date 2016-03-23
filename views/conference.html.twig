@@ -1,7 +1,6 @@
 <ul>
     {% for talk in conference.schedule %}
-        <li class="talk">{{ talk.title }} -
-            <a href="">Add to my schedule</a>
+        <li class="talk">{{ talk.title }}
             <form action="/my-schedule" method="post">
                 <input type="hidden" name="conference" value="{{ conference.name }}"/>
                 <input type="hidden" name="talk" value="{{ talk.title }}"/>
